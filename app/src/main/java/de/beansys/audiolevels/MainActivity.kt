@@ -11,7 +11,6 @@ import android.os.Handler
 import android.os.Looper
 import android.text.InputType
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -23,6 +22,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.textview.MaterialTextView
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.row_system).setOnClickListener { openVolumePanel(AudioManager.STREAM_SYSTEM) }
         findViewById<View>(R.id.row_voice_call).setOnClickListener { openVolumePanel(AudioManager.STREAM_VOICE_CALL) }
 
-        findViewById<Button>(R.id.button_add_preset).setOnClickListener {
+        findViewById<MaterialButton>(R.id.button_add_preset).setOnClickListener {
             val defaultName = "Preset ${presets.size + 1}"
             showPresetEditorDialog(
                 title = "Save Preset",
@@ -201,23 +203,29 @@ class MainActivity : AppCompatActivity() {
         noPresetsText.visibility = if (presets.isEmpty()) View.VISIBLE else View.GONE
 
         presets.forEachIndexed { index, preset ->
-            val card = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                setBackgroundResource(R.drawable.volume_row_bg)
-                setPadding(12.dp(), 12.dp(), 12.dp(), 12.dp())
+            val card = MaterialCardView(this).apply {
+                radius = 12.dp().toFloat()
+                cardElevation = 0f
+                strokeWidth = 1.dp()
+                strokeColor = ContextCompat.getColor(this@MainActivity, R.color.row_stroke)
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 ).also { it.bottomMargin = 10.dp() }
             }
 
-            val title = TextView(this).apply {
+            val cardContent = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(12.dp(), 12.dp(), 12.dp(), 12.dp())
+            }
+
+            val title = MaterialTextView(this).apply {
                 text = preset.name
                 textSize = 16f
                 setTypeface(typeface, android.graphics.Typeface.BOLD)
             }
 
-            val summary = TextView(this).apply {
+            val summary = MaterialTextView(this).apply {
                 text = labeledPresetDetails(preset)
                 setPadding(0, 6.dp(), 0, 10.dp())
             }
@@ -226,14 +234,18 @@ class MainActivity : AppCompatActivity() {
                 orientation = LinearLayout.HORIZONTAL
             }
 
-            val applyButton = Button(this).apply {
+            val applyButton = MaterialButton(this).apply {
                 text = "Apply"
                 setOnClickListener {
                     showApplyConfirmation(preset)
                 }
             }
 
-            val editButton = Button(this).apply {
+            val editButton = MaterialButton(
+                this,
+                null,
+                com.google.android.material.R.attr.materialButtonOutlinedStyle
+            ).apply {
                 text = "Edit"
                 setOnClickListener {
                     showPresetEditorDialog(
@@ -249,7 +261,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val deleteButton = Button(this).apply {
+            val deleteButton = MaterialButton(
+                this,
+                null,
+                com.google.android.material.R.attr.materialButtonOutlinedStyle
+            ).apply {
                 text = "Delete"
                 setOnClickListener {
                     AlertDialog.Builder(this@MainActivity)
@@ -276,9 +292,10 @@ class MainActivity : AppCompatActivity() {
             buttonRow.addView(editButton, middleWeightParams)
             buttonRow.addView(deleteButton, weightParams)
 
-            card.addView(title)
-            card.addView(summary)
-            card.addView(buttonRow)
+            cardContent.addView(title)
+            cardContent.addView(summary)
+            cardContent.addView(buttonRow)
+            card.addView(cardContent)
 
             presetsContainer.addView(card)
         }
