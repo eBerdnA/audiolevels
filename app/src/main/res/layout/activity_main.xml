@@ -23,14 +23,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Values update automatically."
+            android:text="Values update automatically. Tap a row to open that stream control."
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
         <LinearLayout
+            android:id="@+id/row_music"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/volume_row_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="12dp">
 
@@ -49,10 +53,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/row_ring"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/volume_row_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="12dp">
 
@@ -71,10 +79,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/row_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/volume_row_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="12dp">
 
@@ -93,10 +105,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/row_alarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/volume_row_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="12dp">
 
@@ -115,10 +131,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/row_system"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/volume_row_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="12dp">
 
@@ -137,10 +157,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/row_voice_call"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/volume_row_bg"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="12dp">
 
@@ -157,6 +181,36 @@
                 android:layout_height="wrap_content"
                 android:text="0 / 0 (0.0%)" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Presets"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_add_preset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Save Current As Preset" />
+
+        <TextView
+            android:id="@+id/text_no_presets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="No presets yet."
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+        <LinearLayout
+            android:id="@+id/presets_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" />
 
     </LinearLayout>
 </ScrollView>
