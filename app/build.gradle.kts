@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "de.beansys.audiolevels"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "de.beansys.audiolevels"
-        minSdk = 26
-        targetSdk = 35
+        minSdk = 36
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
