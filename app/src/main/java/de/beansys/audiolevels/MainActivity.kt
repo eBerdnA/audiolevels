@@ -1,4 +1,4 @@
-package com.example.audiolevels
+package de.beansys.audiolevels
 
 import android.content.BroadcastReceiver
 import android.content.Context
